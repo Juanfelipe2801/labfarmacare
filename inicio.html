@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <style>
+                /* Menú lateral */
+                .side-menu {
+                    position: fixed;
+                    top: 64px;
+                    left: 0;
+                    width: 35vw;
+                    max-width: 400px;
+                    height: 100vh;
+                    background: var(--blanco);
+                    box-shadow: 2px 0 8px rgba(16,37,66,0.08);
+                    color: var(--azul-oscuro);
+                    display: flex;
+                    flex-direction: column;
+                    padding: 32px 24px;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: opacity 0.18s ease;
+                    z-index: 1100;
+                }
+                .side-menu.visible {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+                .side-menu a {
+                    text-decoration: none;
+                    color: var(--azul-oscuro);
+                    font-size: 1.2rem;
+                    padding: 12px 0;
+                    border-bottom: 1px solid #eee;
+                    transition: color 0.15s;
+                }
+                .side-menu a:hover {
+                    color: var(--naranja-oscuro);
+                }
+        :root {
+            --blanco: #ffffff;
+            --azul-oscuro: #102542;
+            --naranja-oscuro: #ff6f3c;
+        }
+        body {
+            margin: 0;
+            background: var(--blanco);
+            color: var(--azul-oscuro);
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 64px;
+            background: var(--azul-oscuro);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .navbar-icons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 24px;
+            margin-left: 32px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+        }
+        .icon {
+            display: block;
+            width: 32px;
+            height: 32px;
+            fill: var(--blanco);
+        }
+        main {
+            margin-top: 80px;
+            padding: 32px;
+        }
+        .btn-principal {
+            background: var(--azul-oscuro);
+            color: var(--blanco);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-right: 16px;
+        }
+        .btn-secundario {
+            background: var(--naranja-oscuro);
+            color: var(--blanco);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-icons">
+            <!-- Menú lateral (3 líneas) -->
+            <div id="menu-btn-container" style="position:relative;">
+                <button class="icon-btn" id="menu-btn" title="Menú lateral">
+                    <svg class="icon" viewBox="0 0 32 32">
+                        <rect y="5" width="32" height="4" rx="2"/>
+                        <rect y="14" width="32" height="4" rx="2"/>
+                        <rect y="23" width="32" height="4" rx="2"/>
+                    </svg>
+                </button>
+                <div class="side-menu" id="side-menu">
+                    <a href="#">Inicio</a>
+                    <a href="#">Productos</a>
+                    <a href="#">Se distribuidor</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Sobre Nosotros</a>
+                </div>
+            </div>
+            <!-- Canasta de compras -->
+            <button class="icon-btn" title="Canasta de compras">
+                <svg class="icon" viewBox="0 0 32 32">
+                    <circle cx="12" cy="27" r="2"/>
+                    <circle cx="24" cy="27" r="2"/>
+                    <path d="M4 7h2l4 16h14l4-12H8" stroke="white" stroke-width="2" fill="none"/>
+                </svg>
+            </button>
+            <!-- Lupa (buscar) -->
+            <button class="icon-btn" title="Buscar">
+                <svg class="icon" viewBox="0 0 32 32">
+                    <circle cx="14" cy="14" r="10" stroke="white" stroke-width="2" fill="none"/>
+                    <line x1="22" y1="22" x2="30" y2="30" stroke="white" stroke-width="3"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+    <main>
+        <h1>Bienvenido a Farmacare</h1>
+        <p>Tu tienda de confianza para productos farmacéuticos y de cuidado personal.</p>
+        <button class="btn-principal">Comprar ahora</button>
+        <button class="btn-secundario">Ver ofertas</button>
+    </main>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sideMenu = document.getElementById('side-menu');
+        const menuBtnContainer = document.getElementById('menu-btn-container');
+
+        let menuTimeout;
+
+        function showMenu() {
+            clearTimeout(menuTimeout);
+            sideMenu.classList.add('visible');
+        }
+        function hideMenu() {
+            menuTimeout = setTimeout(() => {
+                sideMenu.classList.remove('visible');
+            }, 80);
+        }
+
+        menuBtn.addEventListener('mouseenter', showMenu);
+        menuBtn.addEventListener('mouseleave', hideMenu);
+        sideMenu.addEventListener('mouseenter', showMenu);
+        sideMenu.addEventListener('mouseleave', hideMenu);
+    </script>
+</body>
+</html>
